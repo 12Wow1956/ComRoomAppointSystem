@@ -19,6 +19,8 @@ public:
 
 	~ Teacher();
 
-private:
 	string m_EmpId;
+
+private:
+	
 };

@@ -8,6 +8,42 @@
 #include "Admin.h"
 using namespace std;
 
+void StudentMenu(Identity* &student) {
+
+	while (true) {
+		int sel = 0;
+		student->showSubMenu();
+		Student* stu = (Student*)student;
+		cout << "请选择： ";
+		cin >> sel;
+
+		if (sel == 1) {
+			// 申请预约
+			stu->applyOrder();
+		}
+		else if (sel == 2) {
+			// 查看预约
+			stu->showMyOrder();
+		}
+		else if (sel == 3) {
+			// 查看所有预约
+			stu->showAllOrder();
+		}
+		else if (sel == 4) {
+			// 取消预约
+			stu->cancelOrder();
+		}
+		else {
+			// 注销登录
+			delete student;
+			cout << "注销成功！" << endl;
+			system("pause");
+			system("cls");
+			return;
+		}
+	}
+}
+
 
 // 管理员界面
 void AdminMenu(Identity* &admin) {	
@@ -69,7 +105,6 @@ void loginIn(string fileName, int type) {
 		return;
 	}
 
-
 	string id; // 编号：学号、职工号
 	string name; // 用户名
 	string pwd; // 密码
@@ -106,7 +141,7 @@ void loginIn(string fileName, int type) {
 				person = new Student(id, name, pwd);
 				system("pause");
 				system("cls");
-				// StudentMenu(person);
+				StudentMenu(person);
 				return;
 			}
 		}		
@@ -183,7 +218,7 @@ int main() {
 			loginIn(STUDENT_FILE, 1);
 			break;
 		case 2:
-			loginIn(TEACHER_FILE, 2);
+			loginIn("TEACHER_FILE", 2);
 			break;
 		case 3:
 			loginIn(ADMIN_FILE, 3);
